@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Clean Blog - Start Bootstrap Theme</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{{ url_for('static', filename='bootstrap.min.css') }}" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="{{ url_for('static', filename='font-awesome.min.css') }}" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- Custom styles for this template -->
+    <link href="{{ url_for('static', filename='clean-blog.min.css') }}" rel="stylesheet">
+
+  </head>
+
+  <body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+      <div class="container">
+        <a class="navbar-brand" href="{{ url_for('index') }}">Start Bootstrap</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          Menu
+          <i class="fa fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('index') }}">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('search_add') }}">Search Events</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('add') }}">Add Events</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="masthead" style="background-image: url('{{ url_for('static', filename='contact-bg.jpg') }}')">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto">
+            <div class="page-heading">
+              <h1>Add Post</h1>
+              <span class="subheading">You can create an event post here.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <form class="container"  method="POST" action="{{ url_for('addpost') }}">
+	    <div class = "control-group">
+             <div class="form-group floating-label-form-group controls">
+	       <label> Title </label>
+               <input type="text" class="form-control" placeholder="Title (requred)" name="title" id="title" required data-validation-required-message="Please enter your phone number.">
+                <p class="help-block text-danger"></p>
+              </div>
+            </div>	      
+            <div class="control-group">
+              <div class="form-group floating-label-form-group controls">
+                <label>Location</label>
+                <textarea rows="5" class="form-control" placeholder="Location (required)" name="location" id="location" required data-validation-required-message="Please enter a message."></textarea>
+                <p class="help-block text-danger"></p>
+              </div>
+            </div>
+	    <div class="control-group">
+              <div class="form-group floating-label-form-group controls">
+                <label>rname</label>
+                <input type="text" class="form-control" placeholder="Name of the speaker (required)" name="rname" id="rname" required data-validation-required-message="Please enter a title.">
+                <p class="help-block text-danger"></p>
+              </div>
+            </div> 
+	    <div class="control-group">
+              <div class="form-group floating-label-form-group controls">
+                <label>otitle</label>
+                <input type="text" class="form-control" placeholder="Organization (required)" name="otitle" id="otitle" required data-validation-required-message="Please enter a title.">
+                <p class="help-block text-danger"></p>
+              </div>
+            </div>
+	     <div class="control-group">
+              <div class="form-group floating-label-form-group controls">
+                <label>iname</label>
+                <input type="textr" class="form-control" placeholder="Institution Name (required)" name="iname" id="iname" required data-validation-required-message="Please enter a title.">
+                <p class="help-block text-danger"></p>
+              </div>
+            </div>
+            <div class="control-group">
+              <div class="form-group floating-label-form-group controls">
+                <label>aname</label>
+                <input type="text" class="form-control" placeholder="Area of the event (required)" name="aname" id="aname" required data-validation-required-message="Please enter a title.">
+                <p class="help-block text-danger"></p>
+              </div>
+            </div>
+            <div class="control-group">
+              <div class="form-group floating-label-form-group controls">
+                <label>dname</label>
+                <input type="text" class="form-control" placeholder="Department name (required)" name="dname" id="dname" required data-validation-required-message="Please enter a title.">
+                <p class="help-block text-danger"></p>
+              </div>
+            </div>
+	    <div class = "control-group">
+	      <div class= "form-group floating-label-form-group controls">
+		<span> Begin Time (required)</span>
+                <label>begin_time</label>
+		<input type="datetime-local" data-format="DD-MM-YYYY HH:mm" data-template="DD / MM / YYYY     HH : mm"  min = min="2012-10-01T13:05:00+02+00"  placeholder="begin_time" name="begin_time" id="begin_time" value = "31/12/2030 00:00" required = "true" data-validation-required-message="Please enter a title.">
+                <script>
+                   $(function(){
+                   $('#datetime24').combodate();  
+                   });
+                </script>
+                <p class="help-block text-danger"></p>
+              </div>
+            </div>
+            <div class="control-group">
+              <div class="form-group floating-label-form-group controls">
+		<span>End Time (required)</span>
+		<label>end_time</label>
+		<input type="datetime-local" data-format="DD-MM-YYYY HH:mm" data-template="DD / MM / YYYY     HH : mm"  min = begin_time placeholder="end_time" name="end_time" id="end_time" value = "31/12/2030 00:00" required = "true" data-validation-required-message="Please enter a title.">
+                <script>
+                   $(function(){
+                   $('#datetime24').combodate();  
+                   });
+                </script>
+                <p class="help-block text-danger"></p>
+              </div>
+            </div>
+            <div class="control-group">
+              <div class="form-group floating-label-form-group controls">
+                <label>Abstract</label>
+                <textarea rows="5" class="form-control" placeholder="Abstract" name="abstract" id="abstract" ></textarea>
+                <p class="help-block text-danger"></p>
+              </div>
+            </div>
+            <div class="control-group">
+              <div class="form-group floating-label-form-group controls">
+                <label>Food_info</label>
+                <textarea rows="5" class="form-control" placeholder="Food Information" name="food_info" id="food_info"></textarea>
+                <p class="help-block text-danger"></p>
+              </div>
+            </div>
+            <div class="control-group">
+              <div class="form-group floating-label-form-group controls">
+                <label>target_audience</label>
+                <textarea rows="5" class="form-control" placeholder="Target Audience" name="target_audience" id="target_audience"></textarea>
+                <p class="help-block text-danger"></p>
+              </div>
+            </div>
+            <div class="control-group">
+              <div class="form-group floating-label-form-group controls">
+                <label>gender</label>
+                <input type="text" class="form-control" placeholder="Gender of the speaker" name="gender" id="gender">
+                <p class="help-block text-danger"></p>
+              </div>
+            </div>
+            <div class="control-group">
+              <div class="form-group floating-label-form-group controls">
+                <label>status</label>
+                <input type="text" class="form-control" placeholder="Academia status of the speaker" name="status" id="status">
+                <p class="help-block text-danger"></p>
+              </div>
+            </div>  
+   	    <br>
+            <div class="form-group">
+              <button type="submit" class="btn btn-secondary" id="sendMessageButton">Send</button>
+            </div>
+          </form>
+        </div>	  
+      </div>	  
+    </div>
+    <hr>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto">
+            <p class="copyright text-muted">Copyright &copy; Yiguang Zhang and Yiru Chen, 2018</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="{{ url_for('static', filename='jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='popper.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='bootstrap.min.js') }}"></script>
+
+    <!-- Contact Form JavaScript -->
+    <script src= "{{ url_for('static', filename='validator.min.js') }}></script>
+
+
+    <!-- Custom scripts for this template -->
+    <script src="{{ url_for('static', filename='clean-blog.min.js') }}"></script>
+
+  </body>
+
+</html>
