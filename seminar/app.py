@@ -275,53 +275,53 @@ def addpost():
 
 
     aname = request.form['aname']
-    #try_aid = 'SELECT aid FROM Area WHERE aname = (:aname)';
-    #cursor = g.conn.execute(text(try_aid), aname = aname);
-    #aid_list = []
-    #for r in cursor:
-    #    aid_list.append(int(r[0]))
-    #if len(aid_list) > 0:
-    #    aid = aid_list[0]
-    #else:
-    cmd2 = 'INSERT INTO Area(aname) Values (:aname)';
-    cursor = g.conn.execute(text(cmd2), aname = aname);
-    cursor_aid = g.conn.execute("""SELECT MAX(aid) FROM Area;""")
-    for r in cursor_aid:
-        aid = int(r[0])
-    cursor.close()
+    try_aid = 'SELECT aid FROM Area WHERE aname = (:aname)';
+    cursor = g.conn.execute(text(try_aid), aname = aname);
+    aid_list = []
+    for r in cursor:
+        aid_list.append(int(r[0]))
+    if len(aid_list) > 0:
+        aid = aid_list[0]
+    else:
+        cmd2 = 'INSERT INTO Area(aname) Values (:aname)';
+        cursor = g.conn.execute(text(cmd2), aname = aname);
+        cursor_aid = g.conn.execute("""SELECT MAX(aid) FROM Area;""")
+        for r in cursor_aid:
+            aid = int(r[0])
+        cursor.close()
 
     iname = request.form['iname']
-    #try_iid = 'SELECT iid FROM Institution WHERE iname = (:iname)';
-    #cursor = g.conn.execute(text(try_iid), iname = iname);
-    #iid_list = []
-    #for r in cursor:
-    #    iid_list.append(int(r[0]))
-    #if len(iid_list) > 0:
-    #    iid = iid_list[0]
-    #else:
-    cmd4 = 'INSERT INTO Institution(iname) Values (:iname)';
-    cursor = g.conn.execute(text(cmd4), iname = iname);
-    cursor_iid = g.conn.execute("""SELECT MAX(iid) FROM Institution;""")
-    for r in cursor_iid:
-        iid = int(r[0])
-    cursor.close()
+    try_iid = 'SELECT iid FROM Institution WHERE iname = (:iname)';
+    cursor = g.conn.execute(text(try_iid), iname = iname);
+    iid_list = []
+    for r in cursor:
+        iid_list.append(int(r[0]))
+    if len(iid_list) > 0:
+        iid = iid_list[0]
+    else:
+        cmd4 = 'INSERT INTO Institution(iname) Values (:iname)';
+        cursor = g.conn.execute(text(cmd4), iname = iname);
+        cursor_iid = g.conn.execute("""SELECT MAX(iid) FROM Institution;""")
+        for r in cursor_iid:
+           iid = int(r[0])
+        cursor.close()
 
  
     otitle = request.form['otitle']
-    #try_oid = 'SELECT oid FROM Organization WHERE otitle = (:otitle)';
-    #cursor = g.conn.execute(text(try_oid), otitle = otitle);
-    #oid_list = []
-    #for r in cursor:
-    #    oid_list.append(int(r[0]))
-    #if len(oid_list) > 0:
-    #    oid = oid_list[0]
-    #else:
-    cmd5 = 'INSERT INTO Organization(iid, otitle) Values ((:iid), (:otitle))';
-    cursor = g.conn.execute(text(cmd5), iid = iid, otitle = otitle);
-    cursor_oid = g.conn.execute("""SELECT MAX(oid) FROM Organization;""")
-    for r in cursor_oid:
-        oid = int(r[0])
-    cursor.close()
+    try_oid = 'SELECT oid FROM Organization WHERE otitle = (:otitle)';
+    cursor = g.conn.execute(text(try_oid), otitle = otitle);
+    oid_list = []
+    for r in cursor:
+        oid_list.append(int(r[0]))
+    if len(oid_list) > 0:
+        oid = oid_list[0]
+    else:
+        cmd5 = 'INSERT INTO Organization(iid, otitle) Values ((:iid), (:otitle))';
+        cursor = g.conn.execute(text(cmd5), iid = iid, otitle = otitle);
+        cursor_oid = g.conn.execute("""SELECT MAX(oid) FROM Organization;""")
+        for r in cursor_oid:
+            oid = int(r[0])
+        cursor.close()
 
 
     cmd6 = 'INSERT INTO Hold(oid, eid) Values((:oid),(:eid))';
@@ -337,20 +337,20 @@ def addpost():
     cursor.close() 
   
     dname = request.form['dname']
-    #try_did = 'SELECT did FROM Department WHERE dname = (:dname)';
-    #cursor = g.conn.execute(text(try_did), dname = dname);
-    #did_list = []
-    #for r in cursor:
-    #    did_list.append(int(r[0]))
-    #if len(did_list) > 0:
-    #    did = did_list[0]
-    #else:
-    cmd8 = 'INSERT INTO Department(dname, iid) SELECT (:dname), (:iid)';
-    cursor = g.conn.execute(text(cmd8), dname = dname, iid = iid);
-    cursor_did = g.conn.execute("""SELECT MAX(did) FROM Department;""")
-    for r in cursor_did:
-        did = int(r[0])
-    cursor.close()
+    try_did = 'SELECT did FROM Department WHERE dname = (:dname)';
+    cursor = g.conn.execute(text(try_did), dname = dname);
+    did_list = []
+    for r in cursor:
+        did_list.append(int(r[0]))
+    if len(did_list) > 0:
+        did = did_list[0]
+    else:
+        cmd8 = 'INSERT INTO Department(dname, iid) SELECT (:dname), (:iid)';
+        cursor = g.conn.execute(text(cmd8), dname = dname, iid = iid);
+        cursor_did = g.conn.execute("""SELECT MAX(did) FROM Department;""")
+        for r in cursor_did:
+            did = int(r[0])
+        cursor.close()
 
     cmd9 = 'INSERT INTO Affiliate_with_department(did, rid) VALUES((:did),(:rid))';
     cursor = g.conn.execute(text(cmd9), did = did, rid = rid);
