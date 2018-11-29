@@ -50,7 +50,7 @@
     </nav>
 
     <!-- Page Header -->
-    <header class="masthead" style="background-image: url('{{ url_for('static', filename='contact-bg.jpg') }}')">
+    <header class="masthead" style="background-image: url('{{ url_for('static', filename='99579b248f33275.jpg') }}')">
       <div class="container">
         <div class="row">
           <div class="col-lg-8 col-md-10 mx-auto">
@@ -71,14 +71,14 @@
 	    <div class = "control-group">
              <div class="form-group floating-label-form-group controls">
 	       <label> Title </label>
-               <input type="text" class="form-control" placeholder="Search by words in titles" name="title" id="title" >
+               <input type="text" class="form-control" placeholder="Search by titles" name="title" id="title" >
                 <p class="help-block text-danger"></p>
               </div>
             </div>	      
             <div class="control-group">
               <div class="form-group floating-label-form-group controls">
                 <label>Location</label>
-                <textarea rows="5" class="form-control" placeholder="Search by location" name="location" id="location" ></textarea>
+                <input type = "text" class="form-control" placeholder="Search by location" name="location" id="location" >
                 <p class="help-block text-danger"></p>
               </div>
             </div>
@@ -117,6 +117,14 @@
                 <p class="help-block text-danger"></p>
               </div>
             </div>
+	    <div class="control-group">
+              <div class="form-group floating-label-form-group controls">
+                <label>target_audience</label>
+                <input type="text" class="form-control" placeholder="Search by Target Audience" name="target_audience" id="target_audience">
+                <p class="help-block text-danger"></p>
+              </div>
+            </div>
+
 	    <div class = "control-group">
 	      <div class= "form-group floating-label-form-group controls">
 		<span>Search by Earliest Begin Time</span>
@@ -152,70 +160,6 @@
                       <span> With Food </span>
 		</fieldset>
 	      </div>
-            </div>
-            <div class="control-group">
-              <div class="form-group floating-label-form-group controls">
-                <label>target_audience</label>
-		<fieldset>
-                  <legend>Search by Target Audience</legend>
-                   <div>
-                       <input type="checkbox" id="tg_faculty" name="tg_faculty" value="tg_faculty">
-                       <span> Faculty </span>
-                   </div>
-                   <div>
-                     <input type="checkbox" id="tg_pos" name="tg_pos" value="tg_pos">
-                     <span> Postdoc </span>
-		   </div>
-                   <div>
-                     <input type="checkbox" id="tg_phd" name="tg_phd" value="tg_phd">
-                     <span> Ph.D. </span>
-		   </div>
-                   <div>
-                     <input type="checkbox" id="tg_ms" name="tg_ms" value="tg_ms">
-                     <span> Master </span>
-		   </div>
-		   <div>
-                     <input type="checkbox" id="tg_under" name="tg_under" value="tg_under">
-                     <span> Undergraduate </span>
-		   </div>
-                   <div>
-                     <input type="checkbox" id="tg_visitor" name="tg_visitor" value="tg_visitor">
-                     <span> Visitor </span>
-		   </div>
-                </fieldset>
-              </div>
-            </div>
-            <div class="control-group">
-              <div class="form-group floating-label-form-group controls">
-                <label>status</label>
-		<fieldset>
-                  <legend>Search by Speaker status</legend>
-                   <div>
-                       <input type="checkbox" id="st_faculty" name="st_faculty" value="st_faculty">
-                       <span> Faculty </span>
-                   </div>
-                   <div>
-                     <input type="checkbox" id="st_pos" name="st_pos" value="st_pos">
-                     <span> Postdoc </span>
-		   </div>
-                   <div>
-                     <input type="checkbox" id="st_phd" name="st_phd" value="st_phd">
-                     <span> Ph.D. </span>
-		   </div>
-                   <div>
-                     <input type="checkbox" id="st_ms" name="st_ms" value="st_ms">
-                     <span> Master </span>
-		   </div>
-		   <div>
-                     <input type="checkbox" id="st_under" name="st_under" value="st_under">
-                     <span> Undergraduate </span>
-		   </div>
-                   <div>
-                     <input type="checkbox" id="st_visitor" name="st_visitor" value="st_visitor">
-                     <span> Visitor </span>
-		   </div>
-                </fieldset>
-              </div>
             </div>
 	    
 	    <br>

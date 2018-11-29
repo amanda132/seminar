@@ -72,7 +72,7 @@ def about():
 
 @app.route('/post/<int:post_eid>')
 def post(post_eid):
-    cmd = 'SELECT Event.eid, Event.location, Event.food_info, Event.title, Event.abstract, Event.begin_time, Event.end_time, Organization.otitle, Researcher.rname, Department.dname, Department.iid FROM HOLD, EVENT, Organization, Participate, Researcher, Affiliate_with_department, Department WHERE Hold.eid = Event.eid AND Organization.oid = Hold.oid AND Participate.hid = Hold.hid AND Researcher.rid = Participate.rid AND Affiliate_with_department.rid = Researcher.rid AND Department.did = Affiliate_with_department.did AND Event.eid = (:post_eid)';
+    cmd = 'SELECT Event.eid, Event.location, Event.food_info, Event.title, Event.abstract, Event.begin_time, Event.end_time, Organization.otitle, Researcher.rname, Department.dname, Department.iid, Institution.iname FROM HOLD, EVENT, Organization, Participate, Researcher, Affiliate_with_department, Department, Institution WHERE Hold.eid = Event.eid AND Organization.oid = Hold.oid AND Participate.hid = Hold.hid AND Researcher.rid = Participate.rid AND Affiliate_with_department.rid = Researcher.rid AND Department.did = Affiliate_with_department.did AND Institution.iid = Department.iid AND Event.eid = (:post_eid)';
     cursor = g.conn.execute(text(cmd), post_eid = post_eid);
     post = []
     for r in cursor:
@@ -98,9 +98,10 @@ def search_index():
 
 
     title = request.form['title']
+    print(title)
     if title:
         cursor = g.conn.execute(text(drop_temp));
-        create_temp = "CREATE TABLE Temp AS SELECT * FROM Posts WHERE title = (:title)";
+        create_temp = "CREATE TABLE Temp AS SELECT * FROM Posts WHERE title LIKE (:title)";
         cursor = g.conn.execute(text(create_temp), title = title);
         cursor = g.conn.execute(text(drop_posts));
         cursor = g.conn.execute(text(create_posts_from_temp));
@@ -171,6 +172,14 @@ def search_index():
         cursor = g.conn.execute(text(drop_posts));
         cursor = g.conn.execute(text(create_posts_from_temp));
 
+    target_audience = request.form['target_audience']
+    if target_audience:
+        cursor = g.conn.execute(text(drop_temp));
+        create_temp =  'CREATE TABLE Temp AS SELECT * FROM Posts WHERE target_audience LIKE (:target_audience)';
+        cursor = g.conn.execute(text(create_temp), target_audience = target_audience);
+        cursor = g.conn.execute(text(drop_posts));
+        cursor = g.conn.execute(text(create_posts_from_temp));
+
     food_info = 'food_info' in request.form
     if 'food_info':  
         cursor = g.conn.execute(text(drop_temp));
@@ -185,21 +194,21 @@ def search_index():
     #tg_ms = request.form['tg_ms']
     #tg_under = request.form['tg_under']
     #tg_visitor = request.form['tg_visitor']
-    title_list = ['faculty', 'pos', 'phd', 'ms', 'under', 'visit']
-    tg_list = ['tg_faculty', 'tg_pos', 'tg_phd', 'tg_ms', 'tg_under', 'tg_visitor'] 
-    lst_str = "WHERE"
-    for i in range(len(title_list)):
-        if tg_list[i] in request.form:
-            if i == 0:
-                lst_str = lst_str + title_list[i] + "LIKE %'(:" + title_list[i] +")%'"
-            lst_str = lst_str + "OR" + title_list[i] + "LIKE %'(:" + title_list[i] +")%'"
+    #title_list = ['faculty', 'pos', 'phd', 'ms', 'under', 'visit']
+    #tg_list = ['tg_faculty', 'tg_pos', 'tg_phd', 'tg_ms', 'tg_under', 'tg_visitor'] 
+    #lst_str = "WHERE"
+    #for i in range(len(title_list)):
+    #    if tg_list[i] in request.form:
+    #        if i == 0:
+    #            lst_str = lst_str + title_list[i] + "LIKE %'(:" + title_list[i] +")%'"
+    #        lst_str = lst_str + "OR" + title_list[i] + "LIKE %'(:" + title_list[i] +")%'"
 
-    if lst_str != "WHERE":
-        cursor = g.conn.execute(text(drop_temp));
-        create_temp = 'CREATE TABLE Temp AS SELECT * FROM Posts' + lst_str;
-        cursor = g.conn.execute(text(create_temp));
-        cursor = g.conn.execute(text(drop_posts));
-        cursor = g.conn.execute(text(create_posts_from_temp));
+    #if lst_str != "WHERE":
+    #    cursor = g.conn.execute(text(drop_temp));
+    #    create_temp = 'CREATE TABLE Temp AS SELECT * FROM Posts' + lst_str;
+    #    cursor = g.conn.execute(text(create_temp));
+    #    cursor = g.conn.execute(text(drop_posts));
+    #    cursor = g.conn.execute(text(create_posts_from_temp));
 
 
     #st_faculty = request.form['st_faculty']
@@ -208,21 +217,21 @@ def search_index():
     #st_ms = request.form['st_ms']
     #st_under = request.form['st_under']
     #st_visitor = request.form['st_visitor']
-    lst_str = "WHERE"
-    ind = 0
-    for i in ['st_faculty', 'st_pos', 'st_phd', 'st_ms', 'st_under', 'st_visitor']:
-        if i in check_list:
-            if ind == 0:
-                ind = ind + 1
-                lst_str = lst_str + str(i) + "LIKE %'(:" + str(i) +")%'"
-            lst_str = lst_str + "OR" + str(i)+ "LIKE %'(:" + str(i) +")%'"
+    #lst_str = "WHERE"
+    #ind = 0
+    #for i in ['st_faculty', 'st_pos', 'st_phd', 'st_ms', 'st_under', 'st_visitor']:
+    #    if i in request.form:
+    #        if ind == 0:
+    #            ind = ind + 1
+    #            lst_str = lst_str + str(i) + "LIKE %'(:" + str(i) +")%'"
+    #        lst_str = lst_str + "OR" + str(i)+ "LIKE %'(:" + str(i) +")%'"
 
-    if lst_str != "WHERE":
-        cursor = g.conn.execute(text(drop_temp));
-        create_temp = 'CREATE TABLE Temp AS SELECT * FROM Posts' + lst_str;
-        cursor = g.conn.execute(text(create_temp));
-        cursor = g.conn.execute(text(drop_posts));
-        cursor = g.conn.execute(text(create_posts_from_temp));
+    #if lst_str != "WHERE":
+    #    cursor = g.conn.execute(text(drop_temp));
+    #    create_temp = 'CREATE TABLE Temp AS SELECT * FROM Posts' + lst_str;
+    #    cursor = g.conn.execute(text(create_temp));
+    #    cursor = g.conn.execute(text(drop_posts));
+    #    cursor = g.conn.execute(text(create_posts_from_temp));
 
 
     cursor = g.conn.execute("""SELECT DISTINCT * FROM Posts ORDER BY begin_time DESC;""")

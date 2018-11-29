@@ -60,10 +60,13 @@
               <span class="meta", style = "padding-bottom:2px">Speaker:
 		      {{ post.rname }}
 		</span>
+	      <span class = "meta", style = "padding-bottom:2px"> Department: {{ post.dname }}</span>
+              <span class = "meta", style = "padding-bottom:2px"> Institution: {{ post.iname }}</span>
 	      <span class = "meta", style = "padding-bottom:2px"> Time: {{ post.begin_time.strftime('%X, %B %d, %Y') }}</span>
               <span class = "meta", style = "padding-bottom:2px"> Location: {{ post.location }}</span>
               <span class = "meta", style = "padding-bottom:2px"> Organizer: {{ post.otitle }}</span>
 	      <span class = "meta", style = "padding-bottom:2px"> Food Information: {{ post.food_info }}</span>
+	    
 	    </div>
           </div>
         </div>
